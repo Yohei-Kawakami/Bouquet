@@ -1,4 +1,4 @@
-# Bouquet for wedding moviesBouquet for wedding movies
+# Bouquet for wedding movies
 
 ## Features
 
