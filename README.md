@@ -1,7 +1,6 @@
 # Bouquet for wedding movies
 
 ### [Operating environment]
-<br>
 MacOS X 10.14.3<br>
 ・Google Colaboratory<br>
 ・jupyter 1.0.0<br>
