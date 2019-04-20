@@ -3,12 +3,12 @@
 ### [Operating environment]
 
 MacOS X 10.14.3
-Google Colaboratory
-- jupyter 1.0.0
-- jupyter-core 4.4.0
--Ubuntu 18.04.1
-keras 2.2.4
-Google Drive 1.15.6430.6825
+・Google Colaboratory
+・jupyter 1.0.0
+　　jupyter-core 4.4.0
+　　Ubuntu 18.04.1
+・keras 2.2.4
+・Google Drive 1.15.6430.6825
 
 <img width="774" alt="1" src="https://user-images.githubusercontent.com/46381328/56449464-51a9dc80-6354-11e9-8093-4f16d163b16d.png">
 
