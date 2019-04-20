@@ -9,5 +9,5 @@
 
 <img width="776" alt="5" src="https://user-images.githubusercontent.com/46381328/56449475-6c7c5100-6354-11e9-8545-502414133eee.png">
 
-### Download model[classfier_model.h5] from here.
+### [classfier_model.h5] Download model from here.
 https://drive.google.com/drive/folders/1m2bG_nPv8AqDV7Q3IsTKKnK9JAWILLia
