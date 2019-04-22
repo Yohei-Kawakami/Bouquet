@@ -21,3 +21,6 @@ MacOS X 10.14.3<br>
 
 ### [classfier_model.h5] Download Xception model from here.
 https://drive.google.com/drive/folders/1m2bG_nPv8AqDV7Q3IsTKKnK9JAWILLia
+
+#### a paper of Xception
+https://arxiv.org/pdf/1610.02357.pdf
