@@ -25,7 +25,7 @@ from keras import models
 
 def main():
     # import model
-    print("分類モデルダウンロード中...")
+    print("Downloading the Xception Model...")
     category_model = models.load_model("./model/classfier_model.h5")
 
     # MappingNetwork
@@ -40,10 +40,10 @@ def main():
     # import map 
     mapping_json = 'mapping.json'
     fw = open(mapping_json, 'r')
-    mapping = json.load(fw) #辞書
+    mapping = json.load(fw) # dictionary
 
     # map class
-    map_class = np.array([mapping[k]["class"] for k in mapping.keys()]) #数字のarray
+    map_class = np.array([mapping[k]["class"] for k in mapping.keys()]) # class of map
 
     # map second
     map_second = np.array( [mapping[k]["start"] for k in mapping.keys()]) 

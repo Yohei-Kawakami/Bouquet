@@ -17,12 +17,14 @@ def init_material_json(json_name):
     json.dump("", fw, indent=4)
     fw = open(json_name + ".json", 'w')
     json.dump("", fw, indent=4)
-    print("json初期化完了：")
+    print("JSON is initialized!!：")
 
 
 def get_num_scene_mtr(video_path):
     """
-    動画から取り出すシーン数を決める
+    Choose a number of scenes in as length of video: material network
+    ----------
+    The length of a scene is 9 second
     """
     image_ar = movie_to_image(video_path)
     video_span = image_ar.shape[0]/30
@@ -37,66 +39,68 @@ def get_num_scene_mtr(video_path):
     return num_scene
 
 def movie_to_image(video_path=None, num_cut=None, size=(150, 150)):
-        #動画のパスを渡すとnum_cut(フレーム)ごとの画像をarrayにして返す
+    """
+    return frames of image as array if you give a path of video
+    """
+    if not num_cut:
+        num_cut = 1
+    if not video_path:
+        video_path = "./material/material_video/material_video.mp4"
+    
+    # make an empty array
+    video = []
+    #size = (150, 150)
+    frame_count = 0
+    # read capture video（generate structure of capture）
+    capture = cv2.VideoCapture(video_path)
 
-        if not num_cut:
-            num_cut = 1
-        if not video_path:
-            video_path = "./material/material_video/material_video.mp4"
+    # loop while there are flames
+    while(capture.isOpened()):
+        # get a flame of the video
+        ret, frame = capture.read()
+        if ret == False:
+            break
 
-        video = []
-        #size = (150, 150)
-        frame_count = 0
-        # キャプチャ動画読み込み（キャプチャ構造体生成）
-        capture = cv2.VideoCapture(video_path)
+        # save frames of picture culled as the setting
+        if frame_count % num_cut == 0:
+            frame = cv2.resize(frame, size)
+            #print(frame.shape)
+            video.append(frame)
 
-        # フレーム画像がある限りループ
-        while(capture.isOpened()):
-            # フレーム画像一枚取得
-            ret, frame = capture.read()
-            if ret == False:
-                break
+        frame_count += 1
 
-            # 指定した数だけフレーム画像を間引いて保存
-            if frame_count % num_cut == 0:
-                frame = cv2.resize(frame, size)
-                #print(frame.shape)
-                video.append(frame)
+    # open structure of capture
+    capture.release()
+    video_ar = np.array(video)
 
-            frame_count += 1
+    # output Error if array is empty
+    if not np.any(video_ar):
+        raise Exception('The array is empty!')
 
-        # キャプチャ構造体開放
-        capture.release()
-        video_ar = np.array(video)
-
-        #配列が空ならエラーにする
-        if not np.any(video_ar):
-            raise Exception('配列が空です!')
-
-        return video_ar
+    return video_ar
 
 def get_scene_movie_json(video_path, get_num_scene, json_name, category_model):
     """
-    動画をシーンで分類しジェイソンファイルを作成するまでまとめたやつ
+    a main function of getting json information from video
     """
     image_ar = movie_to_image(video_path)
     num_scene = get_num_scene
-    print("ビデオをイメージ化済...")
+    print("Make array from videos...")
     sabun_ar = background_subtraction(image_ar)
     scene_ar = get_choice_subtraction_index(sabun_ar, int(num_scene))
-    print("分類開始...")
+    print("Start to classify...")
     #scene_to_movie(scene_ar, video_path)
     classify_movie_to_json(image_ar, scene_ar, video_path, json_name, category_model)
 
 
 def classify_movie_to_json(image_ar, scene_ar, video_path, json_name=None, category_model=None):
     """
-    素材一覧のjsonファイルを作る
+    add classes of scene to json file
     """
     if not json_name:
-        json_name = "material" #jsonファイルの名前
+        json_name = "material" # default name of json file
         
-    print("try前...")
+    print("before trying...")
     try:
         f = open(json_name + ".json", 'r')
         json_data = json.load(f)
@@ -104,21 +108,21 @@ def classify_movie_to_json(image_ar, scene_ar, video_path, json_name=None, categ
         num_count = max(list(map(int, jsn.keys()))) + 1
 
     except:
-        #collections.OrderedDictで順序を指定した辞書を作成
+        # make dictinary in order by collections.OrderedDict
         jsn = cl.OrderedDict()
         num_count = 0
-    print("try後...")
+    print("after trying...")
 
     image_ar = image_ar / 255.
     print(image_ar.shape)
     pred_proba = category_model.predict(image_ar, verbose=1)
-    print("pred完了")
+    print("Finish to pred")
 
     for i in range(len(scene_ar)-1):
         arange_ar = np.arange(scene_ar[i], scene_ar[i + 1]).astype("int32")
         clas = np.argmax(np.sum(pred_proba[arange_ar, :], axis=0))
         pred_proba_one_class = pred_proba[arange_ar, clas].reshape(-1).tolist()
-        #辞書の作成
+        # make a dictinary by OrderedDict
         data = cl.OrderedDict()
         data["path"] = video_path
         data["start"] = int(scene_ar[i])
@@ -127,53 +131,56 @@ def classify_movie_to_json(image_ar, scene_ar, video_path, json_name=None, categ
         data["classs_proba"] = pred_proba_one_class
         jsn[num_count] = data
         num_count += 1
-        print(str(i) + "シーン目　素材分類完了")
+        print("SceneNO:" + str(i) + "　Finish to classfy material")
 
-    #json.dump関数でファイルに書き込む 二回やらないとなぜかうまく書き込めない
+    #writing json to a file with function: json.dump; I don't know why it doesn't work if I write twice.
     fw = open(json_name + ".json", 'w')
     json.dump(jsn, fw, indent=4)
     fw = open(json_name + ".json", 'w')
     json.dump(jsn, fw, indent=4)
-    print("json書き出し完了：")
-
+    print("Finish to write json：")
 
 
 def background_subtraction(video_ar):
-        #背景差分をとる関数
+        """
+        get a background subtraction of a video
+        """
         sub = video_ar[:-1] - video_ar[1:]
-        #maeの計算 shape(sample数-1,)
+        # calculate a mean of scenes: shape('a number of sample' -1,)
         subtraction_ar = np.mean(np.abs(sub.reshape(len(sub), -1)), axis=1)
         return subtraction_ar
 
 
 def get_choice_subtraction_index(subtraction_ar, num_scene=None):
         """
-        背景差分を渡すと、シーン分割のインデックスを返す関数
+        return splited scenes from background subtraction
 
         num_scene: int
-            シーンの分かれ目の欲しい数　2ならシーンとしては3になります
+            posts of divided: If 2 are given, it returns 3 scenes
         scene_ar:array shape(num_scene, )
-            0から始まる。各値はシーンの開始フレーム, 動画の最終フレーム
+            start from 0: (a number of frame to start, a number of frame to finish)
         """
-        thresh_frame = 40 #間を開けるフレームの閾値
+        thresh_frame = 40 # a threshold of frames to cull
 
-        #ゼロなら処理終了
+        # If num_scene is empty, it is finished.
         if not num_scene:
             scene_ar = np.array([0, len(subtraction_ar)])
             return scene_ar
 
+        # a number of scenes-1
         arg_ind = np.argsort(-subtraction_ar)
-        kari_num_scene = 10
-        #kari_num_sceneが希望する分割数より少ない場合増やす
-        if num_scene > kari_num_scene:
-            kari_num_scene = num_scene + 5
 
-        while len(arg_ind) >= kari_num_scene:
-            #とりあえず差分上位１０個だけ抜き出す,足りないならループで増やす
-            arg_kari_ind = arg_ind[:kari_num_scene]
-            sort_ind = np.sort(arg_kari_ind)
+        based_num_scene = 10
+        # add scenes to based_num_scene if num_scene > based_num_scene
+        if num_scene > based_num_scene:
+            based_num_scene = num_scene + 5
 
-            #秒数が近いインデックスは消す 閾値15フレーム
+        while len(arg_ind) >= based_num_scene:
+            # pick up based num scenes from the top ofsabtraction(if it is needed more scenes, the loop add more them)
+            arg_base_ind = arg_ind[:based_num_scene]
+            sort_ind = np.sort(arg_base_ind)
+
+            # delete index so near to each other
             for i in range(len(sort_ind)):
                 try:
                     while True:
@@ -184,7 +191,7 @@ def get_choice_subtraction_index(subtraction_ar, num_scene=None):
                 except IndexError:
                     break
 
-            #動画の最初から0.5秒空いてないとそのインデックスは消す
+            # delete index so near to starting point
             try:
                 while True:
                     if sort_ind[0] <= thresh_frame:
@@ -192,7 +199,7 @@ def get_choice_subtraction_index(subtraction_ar, num_scene=None):
                     else:
                         break
             
-            #動画の最後から0.5秒空いてないとそのインデックスは消す
+            # delete index so near to end point
                 while True:
                     if (len(subtraction_ar) - 1 - sort_ind[-1]) <= thresh_frame:
                         sort_ind = np.delete(sort_ind, -1)
@@ -201,31 +208,46 @@ def get_choice_subtraction_index(subtraction_ar, num_scene=None):
             except IndexError:
                     break
 
-            #num_sceneより多くシーンが抜き出せていればbreakする
+            # The roop is broken if picked up more than num_scene
             if len(sort_ind) >= num_scene:
                 break
             else:
-                kari_num_scene += 5
+                based_num_scene += 5
 
-        #昇順になっているsort_indを差分降順に直す
-        scene_ar = np.zeros(len(arg_kari_ind)) - 99
+        # arrange sort_ind in descending order
+        scene_ar = np.zeros(len(arg_base_ind)) - 99
         for i in sort_ind:
-            id = np.where(arg_kari_ind == i)[0]
+            id = np.where(arg_base_ind == i)[0]
             scene_ar[id] = i
         scene_ar = np.delete(scene_ar, np.where(scene_ar == -99))
-        scene_ar += 1  #差分なのでシーンの分かれ目はプラス１になる
-        scene_ar = np.sort(scene_ar[:num_scene])  #シーンを取り出し後昇順に並び替える
-        scene_ar = np.insert(scene_ar, 0, 0)  #ぜろを先頭に挿入
-        scene_ar = np.append(scene_ar,len(subtraction_ar))  #動画の最終フレーム数を最後に挿入
+        scene_ar += 1  # the points of devided +1
+        scene_ar = np.sort(scene_ar[:num_scene])  # pick up scenes and arrange in ascending order
+        scene_ar = np.insert(scene_ar, 0, 0)  # Insert 0 to post of starting
+        scene_ar = np.append(scene_ar,len(subtraction_ar))  # Insert a number of an end frame
 
         return scene_ar
 
 
 class MaterialNetwork:
+    '''
+    MaterialNetwork 
+    analyse videos from material_video folder and write as json. 
+
+　   input: video_folder_path, init, category_model, json_name
+     output: material.json(class and seconds of divided scenes) 
+
+    Parameter & Attribute
+    ---------------------------------------
+    video_folder_path: string
+    init: default is False
+    category_model: model instance
+    json_name: string
+
+    '''
     def __init__(self):
         self.video_folder_path = "./material/material_video"
         self.category_path = "./model/classfier_model.h5"
-        self.num_cut = 1 #フレーム間の数　１なら全フレーム取得する
+        self.num_cut = 1 # number of frames; "1" is all flames
 
 
     def material(self, video_folder_path, init=False, category_model=None, json_name='material'):
