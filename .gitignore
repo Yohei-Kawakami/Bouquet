@@ -1,13 +1,9 @@
-# 特定の拡張子を無視する場合はどこにも/を付けない
+# kinds of files
 *.mp4
 *.mp3
 
-# 特定のファイルを無視する場合は先頭に/を付ける
+# specific files
 /npm-debug.log
 
-# 特定のディレクトリを無視する場合は先頭と末尾に/を付ける
-/bouquet/model/data/
+# fspecific folder
 /bouquet/model/
-
-gibo 2.1.2 by Simon Whitaker <sw@netcetera.org>
-https://github.com/simonwhitaker/gibo
