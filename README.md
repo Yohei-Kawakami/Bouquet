@@ -7,8 +7,6 @@
 
 <img width="774" alt="4" src="https://user-images.githubusercontent.com/46381328/56449473-64241600-6354-11e9-8b9b-b32b66cb2fd6.png">
 
-<img width="776" alt="5" src="https://user-images.githubusercontent.com/46381328/56449475-6c7c5100-6354-11e9-8545-502414133eee.png">
-
 <img width="941" alt="6" src="https://user-images.githubusercontent.com/46381328/56795542-aa451200-684b-11e9-89f5-b80108208f5c.png">
 
 ### Download model[classfier_model.h5] from here.
