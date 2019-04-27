@@ -1,5 +1,9 @@
 # "Bouquet" for wedding movies
 
+<img width="774" alt="1" src="https://user-images.githubusercontent.com/46381328/56449464-51a9dc80-6354-11e9-8093-4f16d163b16d.png">
+
+<img width="773" alt="2" src="https://user-images.githubusercontent.com/46381328/56449465-566e9080-6354-11e9-958f-1ff5d62fffb1.png">
+
 ### Download QuickStart in Google Coraboratory
 https://drive.google.com/drive/folders/1L5WbUYWEt1V-PeH05anys08Oee-AaxWP?usp=sharing
 
@@ -20,10 +24,6 @@ https://drive.google.com/drive/folders/1L5WbUYWEt1V-PeH05anys08Oee-AaxWP?usp=sha
 ####                                     "gdrive/My Drive/Bouquet/material/pro_material_mp4/..."
 #### 4, Open 'main.ipynb' by Google colaboratory
 #### 5, Run
-
-<img width="774" alt="1" src="https://user-images.githubusercontent.com/46381328/56449464-51a9dc80-6354-11e9-8093-4f16d163b16d.png">
-
-<img width="773" alt="2" src="https://user-images.githubusercontent.com/46381328/56449465-566e9080-6354-11e9-958f-1ff5d62fffb1.png">
 
 <img width="773" alt="3" src="https://user-images.githubusercontent.com/46381328/56449467-5bcbdb00-6354-11e9-8354-791995558ded.png">
 
