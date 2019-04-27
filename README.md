@@ -1,4 +1,4 @@
-# Bouquet for wedding movies
+# "Bouquet" for wedding movies
 
 ### Download QuickStart in Google Coraboratory / [classfier_model.h5] Xception model from here.
 https://drive.google.com/drive/folders/1XuDtSz8ZdMAS_0cfqzYXlpcIYWdMXNO-?usp=sharing
@@ -31,5 +31,5 @@ https://drive.google.com/drive/folders/1XuDtSz8ZdMAS_0cfqzYXlpcIYWdMXNO-?usp=sha
 
 <img width="941" alt="6" src="https://user-images.githubusercontent.com/46381328/56795542-aa451200-684b-11e9-89f5-b80108208f5c.png">
 
-#### A paper about Exception
+#### [A paper about Exception]
 https://arxiv.org/pdf/1610.02357.pdf
