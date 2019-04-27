@@ -19,5 +19,8 @@
 
 <img width="941" alt="6" src="https://user-images.githubusercontent.com/46381328/56795542-aa451200-684b-11e9-89f5-b80108208f5c.png">
 
-### Download Xception model[classfier_model.h5] from here.
+### Download [classfier_model.h5] Xception model from here.
 https://drive.google.com/drive/folders/1m2bG_nPv8AqDV7Q3IsTKKnK9JAWILLia
+
+#### A paper about Exception
+https://arxiv.org/pdf/1610.02357.pdf
