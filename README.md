@@ -16,7 +16,7 @@ https://drive.google.com/drive/folders/1XuDtSz8ZdMAS_0cfqzYXlpcIYWdMXNO-?usp=sha
 
 #### 1, Set a folder[Bouquet] in your "gdrive/My Drive/..."
 #### 2, Set your videos in "gdrive/My Drive/Bouquet/material/material_video/..."
-#### 3, Set a wedding movie and music in pro_material
+#### 3, Set a wedding movie and music in "gdrive/My Drive/Bouquet/material/pro_material_mp3/..." "gdrive/My Drive/Bouquet/material/pro_material_mp4/..."
 #### 4, Open 'main.ipynb' by Google colaboratory
 #### 5, Run
 
