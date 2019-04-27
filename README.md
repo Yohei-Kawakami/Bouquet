@@ -1,6 +1,7 @@
 # Bouquet for wedding movies
 
-## Download QuickStart in Google Coraboratory / [classfier_model.h5] Xception model from here.
+## Download QuickStart in Google Coraboratory
+## / [classfier_model.h5] Xception model from here.
 https://drive.google.com/drive/folders/1XuDtSz8ZdMAS_0cfqzYXlpcIYWdMXNO-?usp=sharing
 
 [Environment]<br>
