@@ -1,6 +1,6 @@
 # Bouquet for wedding movies
 
-### Download QuickStart in Google Coraboratory / [classfier_model.h5] Xception model from here.
+## Download QuickStart in Google Coraboratory / [classfier_model.h5] Xception model from here.
 https://drive.google.com/drive/folders/1XuDtSz8ZdMAS_0cfqzYXlpcIYWdMXNO-?usp=sharing
 
 [Environment]<br>
@@ -12,6 +12,13 @@ https://drive.google.com/drive/folders/1XuDtSz8ZdMAS_0cfqzYXlpcIYWdMXNO-?usp=sha
 ・keras 2.2.4<br>
  Google Drive 1.15.6430.6825<br>
 
+## [Quick Start]
+
+#### 1, Set a folder[Bouquet] in your "gdrive/My Drive/..."
+#### 2, Set your videos in "gdrive/My Drive/Bouquet/material/material_video/..."
+#### 3, Set a wedding movie and music in pro_material
+#### 4, open 'main.ipynb' by Google colaboratory
+#### 5, run
 
 <img width="774" alt="1" src="https://user-images.githubusercontent.com/46381328/56449464-51a9dc80-6354-11e9-8093-4f16d163b16d.png">
 
