@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*
-import __init__
 import keras
 from keras import models
 import scipy.stats as stats
@@ -16,25 +15,21 @@ def init_material_json(json_name):
     json.dump("", fw, indent=4)
     fw = open(json_name + ".json", 'w')
     json.dump("", fw, indent=4)
-    print("JSON is initialized!!：")
+    print("JSON is initialized!!Sample is modified!!!：")
 
 
 def get_num_scene_map(video_path):
-    """
-    Choose a number of scenes in as length of video: mapping network
-    ----------
-    The length of a scene is 3 second
-    """
     image_ar = movie_to_image(video_path)
     video_span = image_ar.shape[0]/30
 
     if (video_span//3) -1 < 1:
         num_scene = 0
-    elif 1 <= (video_span//3) -1 < 19:
+    elif 1 <= (video_span//3) -1 < 25:
         num_scene = (video_span//5) -1
 
     else:
-        num_scene = 19
+        num_scene = 25
+        # Here is changed
     return num_scene
 
 def movie_to_image(video_path=None, num_cut=None, size=(150, 150)):
