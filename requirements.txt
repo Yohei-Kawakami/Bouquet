@@ -118,7 +118,7 @@ librosa==0.6.3
 lightgbm==2.2.3
 llvmlite==0.27.0
 locket==0.2.0
-lxml==4.3.2
+lxml==4.6.5
 Markdown==3.0.1
 MarkupSafe==1.1.1
 matplotlib==3.0.2
